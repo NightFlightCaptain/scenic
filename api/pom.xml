@@ -46,6 +46,11 @@
 			</exclusions>
 		</dependency>
 
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
 		<!--集成druid连接池-->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -63,7 +68,13 @@
             <artifactId>swagger-annotations</artifactId>
             <version>1.5.6</version>
         </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>

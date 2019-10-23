@@ -7,6 +7,8 @@ import com.hust.software.scenic.mgb.model.User;
  * @Date: 2019/10/22 22:41
  */
 public interface UserService {
-    int count();
-    User getUser(Integer id);
+
+    User addUser(User user);
+
+    User getUser(String account, String password);
 }

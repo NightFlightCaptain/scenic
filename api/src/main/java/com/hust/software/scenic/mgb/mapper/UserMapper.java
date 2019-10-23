@@ -2,10 +2,15 @@ package com.hust.software.scenic.mgb.mapper;
 
 import com.hust.software.scenic.mgb.model.User;
 import com.hust.software.scenic.mgb.model.UserExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 public interface UserMapper {
+    @Select("select * from user where account =#{account}")
+    User getUserByAccount(String account);
+
     int countByExample(UserExample example);
 
     int deleteByExample(UserExample example);
