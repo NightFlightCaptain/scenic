@@ -22,8 +22,6 @@ class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-
-
     @Test
     void addUser() throws Exception {
         RequestBuilder request  = post("http://localhost:8004/user")
