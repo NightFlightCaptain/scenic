@@ -5,7 +5,6 @@ import com.hust.software.scenic.mgb.mapper.MarkMapper;
 import com.hust.software.scenic.mgb.model.Mark;
 import com.hust.software.scenic.mgb.model.MarkExample;
 import com.hust.software.scenic.service.MarkService;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +30,7 @@ public class MarkServiceImpl implements MarkService{
         mark.setScenicId(scenicId);
         mark.setMarkDate(new Date());
         markMapper.insertSelective(mark);
-        return CommonResult.success("打开成功，该用户是第"+userId+"位打卡的用户");
+        return CommonResult.success("打开成功，该用户是第"+userId+"位打卡的用户",mark);
     }
 
     @Override

@@ -6,7 +6,6 @@ import com.hust.software.scenic.mgb.mapper.UserMapper;
 import com.hust.software.scenic.mgb.model.User;
 import com.hust.software.scenic.mgb.model.UserExample;
 import com.hust.software.scenic.service.UserService;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +29,7 @@ public class UserServiceImpl implements UserService {
         user.setSolt(UUID.randomUUID().toString().substring(0, 5));
         user.setPassword(MD5Util.MD5(user.getPassword() + user.getSolt()));
         userMapper.insertSelective(user);
-        return CommonResult.success("成功添加");
+        return CommonResult.success("成功添加",user);
     }
 
     @Override

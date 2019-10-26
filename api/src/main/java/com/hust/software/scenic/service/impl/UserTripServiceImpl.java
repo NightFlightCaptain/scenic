@@ -5,14 +5,11 @@ import com.hust.software.scenic.mgb.mapper.MainTripMapper;
 import com.hust.software.scenic.mgb.mapper.TripMapper;
 import com.hust.software.scenic.mgb.model.MainTrip;
 import com.hust.software.scenic.mgb.model.Trip;
-import com.hust.software.scenic.mgb.model.TripExample;
 import com.hust.software.scenic.service.UserTripService;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author: 小栗旬
@@ -35,7 +32,7 @@ public class UserTripServiceImpl implements UserTripService {
         trip.setMainTripId(mainTripId);
         trip.setUserId(userId);
         tripMapper.insertSelective(trip);
-        return CommonResult.success("成功添加");
+        return CommonResult.success("成功添加",trip);
     }
 
     /**

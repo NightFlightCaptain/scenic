@@ -11,7 +11,6 @@ import com.hust.software.scenic.mgb.model.MainTripExample;
 import com.hust.software.scenic.mgb.model.SingleTrip;
 import com.hust.software.scenic.mgb.model.SingleTripExample;
 import com.hust.software.scenic.service.TripService;
-import io.swagger.models.auth.In;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,7 +48,7 @@ public class TripServiceImpl implements TripService {
         for (List<Integer> scenicOrder : scenicOrders) {
             addSingleTrip(mainTrip.getId(), StringUtils.join(scenicOrder.toArray(),","));
         }
-        return CommonResult.success("成功添加");
+        return CommonResult.success("成功添加",mainTrip);
     }
 
     private void addSingleTrip(Integer mainTripId, String scenicOrder) {
