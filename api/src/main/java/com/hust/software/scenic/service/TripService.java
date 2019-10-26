@@ -1,6 +1,6 @@
 package com.hust.software.scenic.service;
 
-import com.hust.software.scenic.dto.TripDto;
+import com.hust.software.scenic.common.CommonResult;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * @Date: 2019/10/25 9:17
  */
 public interface TripService {
-    void addMainTrip(List<String> scenicOrders);
+    CommonResult addMainTrip(List<List<Integer>> scenicOrders);
 
-    TripDto getMainTrip(int mainTripId);
+    CommonResult getMainTrip(int mainTripId);
 }

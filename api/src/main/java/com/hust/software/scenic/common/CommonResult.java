@@ -23,6 +23,14 @@ public class CommonResult {
         return new CommonResult(ResultCode.SUCCESS.getCode(),ResultCode.SUCCESS.getMessage(),data);
     }
 
+    public static CommonResult success(String message){
+        return new CommonResult(ResultCode.SUCCESS.getCode(),message,null);
+    }
+
+    public static CommonResult success(String message,Object data){
+        return new CommonResult(ResultCode.SUCCESS.getCode(),message,data);
+    }
+
     public static  CommonResult failed(Object data){
         return new CommonResult(ResultCode.FAILED.getCode(),ResultCode.FAILED.getMessage(),data);
     }
@@ -32,6 +40,14 @@ public class CommonResult {
      */
     public static  CommonResult failed() {
         return new CommonResult(ResultCode.FAILED.getCode(),ResultCode.FAILED.getMessage(),null);
+    }
+
+    public static CommonResult failed(String message){
+        return new CommonResult(ResultCode.FAILED.getCode(),message,null);
+    }
+
+    public static CommonResult failed(String message,Object data){
+        return new CommonResult(ResultCode.FAILED.getCode(),message,data);
     }
 
     

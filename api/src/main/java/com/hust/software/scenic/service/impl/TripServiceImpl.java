@@ -1,5 +1,6 @@
 package com.hust.software.scenic.service.impl;
 
+import com.hust.software.scenic.common.CommonResult;
 import com.hust.software.scenic.dto.TripDto;
 import com.hust.software.scenic.dto.TripScenicDto;
 import com.hust.software.scenic.mgb.mapper.MainTripMapper;
@@ -9,6 +10,7 @@ import com.hust.software.scenic.mgb.model.MainTrip;
 import com.hust.software.scenic.mgb.model.SingleTrip;
 import com.hust.software.scenic.mgb.model.SingleTripExample;
 import com.hust.software.scenic.service.TripService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,15 +35,16 @@ public class TripServiceImpl implements TripService {
     ScenicMapper scenicMapper;
 
     @Override
-    public void addMainTrip(List<String> scenicOrders) {
+    public CommonResult addMainTrip(List<List<Integer>> scenicOrders) {
         int sumDay = scenicOrders.size();
         MainTrip mainTrip = new MainTrip();
         mainTrip.setSumDay(sumDay);
         int mainTripId = mainTripMapper.insertSelective(mainTrip);
 
-        for (String scenicOrder : scenicOrders) {
-            addSingleTrip(mainTripId, scenicOrder);
+        for (List<Integer> scenicOrder : scenicOrders) {
+            addSingleTrip(mainTripId, StringUtils.join(scenicOrder.toArray()));
         }
+        return CommonResult.success("成功添加");
     }
 
     private void addSingleTrip(int mainTripId, String scenicOrder) {
@@ -57,7 +60,7 @@ public class TripServiceImpl implements TripService {
      * @return 总行程下面的单日行程的每日行程的景点信息
      */
     @Override
-    public TripDto getMainTrip(int mainTripId) {
+    public CommonResult getMainTrip(int mainTripId) {
         TripDto tripDto = new TripDto();
         MainTrip mainTrip = mainTripMapper.selectByPrimaryKey(mainTripId);
         if (mainTrip == null) {
@@ -82,6 +85,6 @@ public class TripServiceImpl implements TripService {
             mainTrips.add(singleTripScenics);
         }
         tripDto.setSingleTrips(mainTrips);
-        return tripDto;
+        return CommonResult.success(tripDto);
     }
 }
