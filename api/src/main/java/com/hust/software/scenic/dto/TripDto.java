@@ -1,5 +1,7 @@
 package com.hust.software.scenic.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.List;
 
 /**
@@ -7,8 +9,13 @@ import java.util.List;
  * @Date: 2019/10/25 9:32
  */
 public class TripDto {
+    @ApiModelProperty(value = "总计天数")
     private int sumDay;
+
+    @ApiModelProperty(value = "使用次数/热度")
     private int count;
+
+    @ApiModelProperty(value = "景点列表，一个list表示一天的景点")
     private List<List<TripScenicDto>> singleTrips;
 
     public int getSumDay() {

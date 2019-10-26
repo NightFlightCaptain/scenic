@@ -1,6 +1,7 @@
 package com.hust.software.scenic.dto;
 
 import com.hust.software.scenic.mgb.model.Scenic;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,20 +13,28 @@ import java.util.Date;
 public class TripScenicDto {
 
     private Integer id;
+    @ApiModelProperty(value = "名称")
     private String name;
 
+    @ApiModelProperty(value = "介绍")
     private String introduction;
 
+    @ApiModelProperty(value = "开放时间")
     private String openTime;
 
+    @ApiModelProperty(value = "门票价格")
     private BigDecimal price;
 
+    @ApiModelProperty(value = "建议游玩时间")
     private Date suggestedTime;
 
+    @ApiModelProperty(value = "经度")
     private BigDecimal longitude;
 
+    @ApiModelProperty(value = "维度")
     private BigDecimal latitude;
 
+    @ApiModelProperty(value = "图片链接")
     private String photoUrl;
 
     public TripScenicDto() {
