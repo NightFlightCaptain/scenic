@@ -18,6 +18,7 @@ class TripServiceImplTest {
     private TripService tripService;
     @Test
     void addMainTrip() {
+
     }
 
     @Test

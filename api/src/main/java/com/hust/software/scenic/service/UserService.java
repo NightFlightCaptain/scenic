@@ -1,5 +1,6 @@
 package com.hust.software.scenic.service;
 
+import com.hust.software.scenic.common.CommonResult;
 import com.hust.software.scenic.mgb.model.User;
 
 /**
@@ -8,7 +9,7 @@ import com.hust.software.scenic.mgb.model.User;
  */
 public interface UserService {
 
-    User addUser(User user);
+    CommonResult addUser(User user);
 
-    User getUser(String account, String password);
+    CommonResult getUser(String account, String password);
 }

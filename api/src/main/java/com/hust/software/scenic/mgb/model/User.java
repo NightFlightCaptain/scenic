@@ -1,9 +1,11 @@
 package com.hust.software.scenic.mgb.model;
 
 import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
+    @ApiModelProperty(value = "不要填")
     private Integer id;
 
     @ApiModelProperty(value = "账号")
@@ -27,13 +29,13 @@ public class User implements Serializable {
     @ApiModelProperty(value = "年龄")
     private Integer age;
 
-    @ApiModelProperty(value = "头像")
+    @ApiModelProperty(value = "头像Url")
     private String headPortrait;
 
-    @ApiModelProperty(value = "密钥")
+    @ApiModelProperty(value = "不要填")
     private String solt;
 
-    @ApiModelProperty(value = "是否删除")
+    @ApiModelProperty(value = "不要填")
     private Boolean isDeleted;
 
     private static final long serialVersionUID = 1L;

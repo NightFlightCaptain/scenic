@@ -1,10 +1,12 @@
 package com.hust.software.scenic.service.impl;
 
+import com.hust.software.scenic.common.CommonResult;
 import com.hust.software.scenic.common.MD5Util;
 import com.hust.software.scenic.mgb.mapper.UserMapper;
 import com.hust.software.scenic.mgb.model.User;
 import com.hust.software.scenic.mgb.model.UserExample;
 import com.hust.software.scenic.service.UserService;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,24 +23,38 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public User addUser(User user) {
-        user.setSolt(UUID.randomUUID().toString().substring(0,5));
-        user.setPassword(MD5Util.MD5(user.getPassword()+user.getSolt()));
+    public CommonResult addUser(User user) {
+        if (isUserExist(user.getAccount())) {
+            return CommonResult.success("该账号已经存在");
+        }
+        user.setSolt(UUID.randomUUID().toString().substring(0, 5));
+        user.setPassword(MD5Util.MD5(user.getPassword() + user.getSolt()));
         userMapper.insertSelective(user);
-        return user;
+        return CommonResult.success("成功添加");
     }
 
     @Override
-    public User getUser(String account, String password){
+    public CommonResult getUser(String account, String password) {
+        if (!isUserExist(account)){
+            return CommonResult.success("该用户不存在");
+        }
         User user = userMapper.getUserByAccount(account);
-        if (user == null){
-            return null;
+        if (!user.getPassword().equals(MD5Util.MD5(password + user.getSolt()))) {
+            return CommonResult.success("账号或密码错误");
         }
+        return CommonResult.success(user);
+    }
 
-        if (!user.getPassword().equals(MD5Util.MD5(password+user.getSolt()))){
-            return null;
+    private boolean isUserExist(String account) {
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andAccountEqualTo(account);
+        boolean isExist = userMapper.selectByExample(userExample).size() >= 1;
+        if (isExist) {
+            return true;
+        } else {
+            return false;
         }
-        return user;
     }
 
 

@@ -12,6 +12,9 @@ public class MainTrip implements Serializable {
     @ApiModelProperty(value = "使用次数/热度")
     private Integer count;
 
+    @ApiModelProperty(value = "行程名")
+    private String name;
+
     @ApiModelProperty(value = "是否删除")
     private Boolean isDeleted;
 
@@ -41,6 +44,14 @@ public class MainTrip implements Serializable {
         this.count = count;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Boolean getIsDeleted() {
         return isDeleted;
     }
@@ -58,6 +69,7 @@ public class MainTrip implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", sumDay=").append(sumDay);
         sb.append(", count=").append(count);
+        sb.append(", name=").append(name);
         sb.append(", isDeleted=").append(isDeleted);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

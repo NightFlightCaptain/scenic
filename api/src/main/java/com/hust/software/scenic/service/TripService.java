@@ -9,7 +9,9 @@ import java.util.List;
  * @Date: 2019/10/25 9:17
  */
 public interface TripService {
-    CommonResult addMainTrip(List<List<Integer>> scenicOrders);
+    CommonResult addMainTrip(String name,List<List<Integer>> scenicOrders);
 
     CommonResult getMainTrip(int mainTripId);
+
+    CommonResult listAllMainTrips();
 }

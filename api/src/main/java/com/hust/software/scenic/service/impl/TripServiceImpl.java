@@ -7,12 +7,15 @@ import com.hust.software.scenic.mgb.mapper.MainTripMapper;
 import com.hust.software.scenic.mgb.mapper.ScenicMapper;
 import com.hust.software.scenic.mgb.mapper.SingleTripMapper;
 import com.hust.software.scenic.mgb.model.MainTrip;
+import com.hust.software.scenic.mgb.model.MainTripExample;
 import com.hust.software.scenic.mgb.model.SingleTrip;
 import com.hust.software.scenic.mgb.model.SingleTripExample;
 import com.hust.software.scenic.service.TripService;
+import io.swagger.models.auth.In;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +26,7 @@ import java.util.List;
  * @author: 小栗旬
  * @Date: 2019/10/25 9:18
  */
+@Transactional(rollbackFor = Exception.class)
 @Service
 public class TripServiceImpl implements TripService {
     @Autowired
@@ -35,19 +39,20 @@ public class TripServiceImpl implements TripService {
     ScenicMapper scenicMapper;
 
     @Override
-    public CommonResult addMainTrip(List<List<Integer>> scenicOrders) {
+    public CommonResult addMainTrip(String name,List<List<Integer>> scenicOrders) {
         int sumDay = scenicOrders.size();
         MainTrip mainTrip = new MainTrip();
+        mainTrip.setName(name);
         mainTrip.setSumDay(sumDay);
-        int mainTripId = mainTripMapper.insertSelective(mainTrip);
+        mainTripMapper.insertSelective(mainTrip);
 
         for (List<Integer> scenicOrder : scenicOrders) {
-            addSingleTrip(mainTripId, StringUtils.join(scenicOrder.toArray()));
+            addSingleTrip(mainTrip.getId(), StringUtils.join(scenicOrder.toArray(),","));
         }
         return CommonResult.success("成功添加");
     }
 
-    private void addSingleTrip(int mainTripId, String scenicOrder) {
+    private void addSingleTrip(Integer mainTripId, String scenicOrder) {
         SingleTrip singleTrip = new SingleTrip();
         singleTrip.setMainTripId(mainTripId);
         singleTrip.setScenicOrder(scenicOrder);
@@ -64,7 +69,7 @@ public class TripServiceImpl implements TripService {
         TripDto tripDto = new TripDto();
         MainTrip mainTrip = mainTripMapper.selectByPrimaryKey(mainTripId);
         if (mainTrip == null) {
-            return null;
+            return CommonResult.failed("错误的id");
         }
 
         tripDto.setCount(mainTrip.getCount());
@@ -78,13 +83,22 @@ public class TripServiceImpl implements TripService {
 
         List<List<TripScenicDto>> mainTrips = new LinkedList<>();
         for (SingleTrip singleTrip : singleTrips) {
-            List<TripScenicDto> singleTripScenics = new ArrayList<>();
+            List<TripScenicDto> scenicsOneDay = new ArrayList<>();
             //求出每个singleTrip的景点
             Arrays.stream(singleTrip.getScenicOrder().split(","))
-                    .forEachOrdered(scenicId -> singleTripScenics.add(scenicMapper.listTripScenic(Integer.valueOf(scenicId))));
-            mainTrips.add(singleTripScenics);
+                    .forEachOrdered(scenicId -> scenicsOneDay.add(scenicMapper.listTripScenic(Integer.valueOf(scenicId))));
+            mainTrips.add(scenicsOneDay);
         }
         tripDto.setSingleTrips(mainTrips);
         return CommonResult.success(tripDto);
+    }
+
+    @Override
+    public CommonResult listAllMainTrips(){
+        MainTripExample mainTripExample = new MainTripExample();
+        MainTripExample.Criteria criteria = mainTripExample.createCriteria();
+        criteria.andIsDeletedEqualTo(false);
+        List<MainTrip> mainTrips = mainTripMapper.selectByExample(mainTripExample);
+        return CommonResult.success(mainTrips);
     }
 }

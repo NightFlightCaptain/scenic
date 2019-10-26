@@ -3,10 +3,21 @@ package com.hust.software.scenic.common;
 /**
  * @author: 小栗旬
  * @Date: 2019/10/23 17:54
+ *
+ * 统一响应结构
  */
 public class CommonResult {
+    /**
+     * 响应状态码
+     */
     private long code;
+    /**
+     * 响应内容
+     */
     private String message;
+    /**
+     * 响应数据
+     */
     private Object data;
 
     public CommonResult(){

@@ -9,6 +9,7 @@ import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,11 +24,12 @@ public class MarkServiceImpl implements MarkService{
     @Override
     public CommonResult mark(Integer userId,Integer scenicId){
         if (isMarked(userId,scenicId)){
-            return CommonResult.failed("该用户在该景点已经打卡过");
+            return CommonResult.success("该用户在该景点已经打卡过");
         }
         Mark mark = new Mark();
         mark.setUserId(userId);
         mark.setScenicId(scenicId);
+        mark.setMarkDate(new Date());
         markMapper.insertSelective(mark);
         return CommonResult.success("打开成功，该用户是第"+userId+"位打卡的用户");
     }
