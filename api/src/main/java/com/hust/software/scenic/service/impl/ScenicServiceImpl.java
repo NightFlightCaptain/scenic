@@ -89,6 +89,7 @@ public class ScenicServiceImpl implements ScenicService {
 		return CommonResult.success("该景点信息查询成功", map);
 	}
 	
+	
 	/**
 	 * 查询景点列表及其对应的图片
 	 */
