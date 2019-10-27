@@ -11,7 +11,7 @@
  Target Server Version : 50719
  File Encoding         : 65001
 
- Date: 26/10/2019 17:46:24
+ Date: 27/10/2019 13:45:05
 */
 
 SET NAMES utf8mb4;
@@ -60,7 +60,7 @@ CREATE TABLE `mark`  (
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `scenic_id` int(11) NOT NULL COMMENT '景点id',
   `mark_date` date NOT NULL COMMENT '打卡时间',
-  `rank` int(11) DEFAULT NULL COMMENT '打卡名次',
+  `order_rank` int(11) DEFAULT NULL COMMENT '打卡名次',
   `is_deleted` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '打卡表，rank表示第几位打卡用户' ROW_FORMAT = Dynamic;
@@ -122,6 +122,9 @@ CREATE TABLE `scenic`  (
   `suggested_time` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '建议游玩时间',
   `longitude` decimal(10, 7) NOT NULL COMMENT '经度',
   `latitude` decimal(10, 7) NOT NULL COMMENT '维度',
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '地址',
+  `phone` char(11) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '电话',
+  `score` int(11) DEFAULT NULL COMMENT '评分',
   `is_deleted` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否删除',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -129,9 +132,9 @@ CREATE TABLE `scenic`  (
 -- ----------------------------
 -- Records of scenic
 -- ----------------------------
-INSERT INTO `scenic` VALUES (1, '辛亥革命武昌起义纪念馆', '辛亥革命武昌起义纪念馆', '早上8：00-晚上5：00', 20.00, '1小时', 114.3063440, 30.5422890, 0);
-INSERT INTO `scenic` VALUES (2, '八路军武汉办事处旧址纪念馆1层', '八路军武汉办事处旧址纪念馆1层', '早上8：00-晚上5：00', 20.00, '2小时', 114.3094030, 30.6061520, 0);
-INSERT INTO `scenic` VALUES (3, '新跃石门峰名人公园武汉抗战纪念园', '新跃石门峰名人公园武汉抗战纪念园', '早上8：00-晚上5：00', 20.00, '3小时', 114.4802630, 30.5149970, 0);
+INSERT INTO `scenic` VALUES (1, '辛亥革命武昌起义纪念馆', '辛亥革命武昌起义纪念馆', '早上8：00-晚上5：00', 20.00, '1小时', 114.3063440, 30.5422890, NULL, NULL, NULL, 0);
+INSERT INTO `scenic` VALUES (2, '八路军武汉办事处旧址纪念馆1层', '八路军武汉办事处旧址纪念馆1层', '早上8：00-晚上5：00', 20.00, '2小时', 114.3094030, 30.6061520, NULL, NULL, NULL, 0);
+INSERT INTO `scenic` VALUES (3, '新跃石门峰名人公园武汉抗战纪念园', '新跃石门峰名人公园武汉抗战纪念园', '早上8：00-晚上5：00', 20.00, '3小时', 114.4802630, 30.5149970, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for single_trip

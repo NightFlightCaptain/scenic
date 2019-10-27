@@ -17,7 +17,7 @@ public class Mark implements Serializable {
     private Date markDate;
 
     @ApiModelProperty(value = "打卡名次")
-    private Integer rank;
+    private Integer orderRank;
 
     private Boolean isDeleted;
 
@@ -55,12 +55,12 @@ public class Mark implements Serializable {
         this.markDate = markDate;
     }
 
-    public Integer getRank() {
-        return rank;
+    public Integer getOrderRank() {
+        return orderRank;
     }
 
-    public void setRank(Integer rank) {
-        this.rank = rank;
+    public void setOrderRank(Integer orderRank) {
+        this.orderRank = orderRank;
     }
 
     public Boolean getIsDeleted() {
@@ -81,7 +81,7 @@ public class Mark implements Serializable {
         sb.append(", userId=").append(userId);
         sb.append(", scenicId=").append(scenicId);
         sb.append(", markDate=").append(markDate);
-        sb.append(", rank=").append(rank);
+        sb.append(", orderRank=").append(orderRank);
         sb.append(", isDeleted=").append(isDeleted);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
