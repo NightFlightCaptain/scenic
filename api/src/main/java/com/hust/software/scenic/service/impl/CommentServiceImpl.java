@@ -39,7 +39,7 @@ public class CommentServiceImpl implements CommentService {
         CommentExample.Criteria criteria = commentExample.createCriteria();
         criteria.andScenicIdEqualTo(scenicId);
         criteria.andIsDeletedEqualTo(false);
-        List<Comment> comments = commentMapper.selectByExample(commentExample);
+        List<Comment> comments = commentMapper.selectByExampleWithBLOBs(commentExample);
         return CommonResult.success("获取该景点下全部评论",comments);
     }
 
