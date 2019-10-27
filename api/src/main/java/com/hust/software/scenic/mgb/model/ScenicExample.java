@@ -11,6 +11,32 @@ public class ScenicExample {
 
     protected List<Criteria> oredCriteria;
 
+    /**
+     * 添加分页字段，
+     * pageNow当前页
+     * pageSize当前页面大小
+     */
+    protected Integer pageNow;
+    
+    protected Integer pageSize;
+    
+    
+    public Integer getPageNow() {
+		return pageNow;
+	}
+
+	public void setPageNow(Integer pageNow) {
+		this.pageNow = pageNow;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+    
     public ScenicExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
