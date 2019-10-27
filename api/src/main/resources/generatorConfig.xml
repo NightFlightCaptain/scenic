@@ -40,7 +40,7 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.hust.software.scenic.mgb.mapper"
                              targetProject="src\main\java"/>
         <!--生成全部表tableName设为%-->
-        <table tableName="main_trip">
+        <table tableName="scenic">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
     </context>

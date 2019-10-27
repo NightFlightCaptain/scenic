@@ -2,7 +2,6 @@ package com.hust.software.scenic.mgb.model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ScenicExample {
@@ -446,52 +445,62 @@ public class ScenicExample {
             return (Criteria) this;
         }
 
-        public Criteria andSuggestedTimeEqualTo(Date value) {
+        public Criteria andSuggestedTimeEqualTo(String value) {
             addCriterion("suggested_time =", value, "suggestedTime");
             return (Criteria) this;
         }
 
-        public Criteria andSuggestedTimeNotEqualTo(Date value) {
+        public Criteria andSuggestedTimeNotEqualTo(String value) {
             addCriterion("suggested_time <>", value, "suggestedTime");
             return (Criteria) this;
         }
 
-        public Criteria andSuggestedTimeGreaterThan(Date value) {
+        public Criteria andSuggestedTimeGreaterThan(String value) {
             addCriterion("suggested_time >", value, "suggestedTime");
             return (Criteria) this;
         }
 
-        public Criteria andSuggestedTimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andSuggestedTimeGreaterThanOrEqualTo(String value) {
             addCriterion("suggested_time >=", value, "suggestedTime");
             return (Criteria) this;
         }
 
-        public Criteria andSuggestedTimeLessThan(Date value) {
+        public Criteria andSuggestedTimeLessThan(String value) {
             addCriterion("suggested_time <", value, "suggestedTime");
             return (Criteria) this;
         }
 
-        public Criteria andSuggestedTimeLessThanOrEqualTo(Date value) {
+        public Criteria andSuggestedTimeLessThanOrEqualTo(String value) {
             addCriterion("suggested_time <=", value, "suggestedTime");
             return (Criteria) this;
         }
 
-        public Criteria andSuggestedTimeIn(List<Date> values) {
+        public Criteria andSuggestedTimeLike(String value) {
+            addCriterion("suggested_time like", value, "suggestedTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andSuggestedTimeNotLike(String value) {
+            addCriterion("suggested_time not like", value, "suggestedTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andSuggestedTimeIn(List<String> values) {
             addCriterion("suggested_time in", values, "suggestedTime");
             return (Criteria) this;
         }
 
-        public Criteria andSuggestedTimeNotIn(List<Date> values) {
+        public Criteria andSuggestedTimeNotIn(List<String> values) {
             addCriterion("suggested_time not in", values, "suggestedTime");
             return (Criteria) this;
         }
 
-        public Criteria andSuggestedTimeBetween(Date value1, Date value2) {
+        public Criteria andSuggestedTimeBetween(String value1, String value2) {
             addCriterion("suggested_time between", value1, value2, "suggestedTime");
             return (Criteria) this;
         }
 
-        public Criteria andSuggestedTimeNotBetween(Date value1, Date value2) {
+        public Criteria andSuggestedTimeNotBetween(String value1, String value2) {
             addCriterion("suggested_time not between", value1, value2, "suggestedTime");
             return (Criteria) this;
         }

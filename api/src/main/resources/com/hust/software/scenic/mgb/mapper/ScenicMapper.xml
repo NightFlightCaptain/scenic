@@ -7,7 +7,7 @@
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />
     <result column="open_time" jdbcType="VARCHAR" property="openTime" />
     <result column="price" jdbcType="DECIMAL" property="price" />
-    <result column="suggested_time" jdbcType="TIMESTAMP" property="suggestedTime" />
+    <result column="suggested_time" jdbcType="VARCHAR" property="suggestedTime" />
     <result column="longitude" jdbcType="DECIMAL" property="longitude" />
     <result column="latitude" jdbcType="DECIMAL" property="latitude" />
     <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
@@ -111,7 +111,7 @@
       price, suggested_time, longitude, 
       latitude, is_deleted)
     values (#{name,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, #{openTime,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{suggestedTime,jdbcType=TIMESTAMP}, #{longitude,jdbcType=DECIMAL}, 
+      #{price,jdbcType=DECIMAL}, #{suggestedTime,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL}, 
       #{latitude,jdbcType=DECIMAL}, #{isDeleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.hust.software.scenic.mgb.model.Scenic">
@@ -159,7 +159,7 @@
         #{price,jdbcType=DECIMAL},
       </if>
       <if test="suggestedTime != null">
-        #{suggestedTime,jdbcType=TIMESTAMP},
+        #{suggestedTime,jdbcType=VARCHAR},
       </if>
       <if test="longitude != null">
         #{longitude,jdbcType=DECIMAL},
@@ -197,7 +197,7 @@
         price = #{record.price,jdbcType=DECIMAL},
       </if>
       <if test="record.suggestedTime != null">
-        suggested_time = #{record.suggestedTime,jdbcType=TIMESTAMP},
+        suggested_time = #{record.suggestedTime,jdbcType=VARCHAR},
       </if>
       <if test="record.longitude != null">
         longitude = #{record.longitude,jdbcType=DECIMAL},
@@ -220,7 +220,7 @@
       introduction = #{record.introduction,jdbcType=VARCHAR},
       open_time = #{record.openTime,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=DECIMAL},
-      suggested_time = #{record.suggestedTime,jdbcType=TIMESTAMP},
+      suggested_time = #{record.suggestedTime,jdbcType=VARCHAR},
       longitude = #{record.longitude,jdbcType=DECIMAL},
       latitude = #{record.latitude,jdbcType=DECIMAL},
       is_deleted = #{record.isDeleted,jdbcType=BIT}
@@ -244,7 +244,7 @@
         price = #{price,jdbcType=DECIMAL},
       </if>
       <if test="suggestedTime != null">
-        suggested_time = #{suggestedTime,jdbcType=TIMESTAMP},
+        suggested_time = #{suggestedTime,jdbcType=VARCHAR},
       </if>
       <if test="longitude != null">
         longitude = #{longitude,jdbcType=DECIMAL},
@@ -264,7 +264,7 @@
       introduction = #{introduction,jdbcType=VARCHAR},
       open_time = #{openTime,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
-      suggested_time = #{suggestedTime,jdbcType=TIMESTAMP},
+      suggested_time = #{suggestedTime,jdbcType=VARCHAR},
       longitude = #{longitude,jdbcType=DECIMAL},
       latitude = #{latitude,jdbcType=DECIMAL},
       is_deleted = #{isDeleted,jdbcType=BIT}

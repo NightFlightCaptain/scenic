@@ -3,7 +3,6 @@ package com.hust.software.scenic.mgb.model;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class Scenic implements Serializable {
     private Integer id;
@@ -21,7 +20,7 @@ public class Scenic implements Serializable {
     private BigDecimal price;
 
     @ApiModelProperty(value = "建议游玩时间")
-    private Date suggestedTime;
+    private String suggestedTime;
 
     @ApiModelProperty(value = "经度")
     private BigDecimal longitude;
@@ -74,11 +73,11 @@ public class Scenic implements Serializable {
         this.price = price;
     }
 
-    public Date getSuggestedTime() {
+    public String getSuggestedTime() {
         return suggestedTime;
     }
 
-    public void setSuggestedTime(Date suggestedTime) {
+    public void setSuggestedTime(String suggestedTime) {
         this.suggestedTime = suggestedTime;
     }
 
