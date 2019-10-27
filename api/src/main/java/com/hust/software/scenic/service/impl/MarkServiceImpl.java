@@ -2,6 +2,7 @@ package com.hust.software.scenic.service.impl;
 
 import com.hust.software.scenic.common.CommonResult;
 import com.hust.software.scenic.mgb.mapper.MarkMapper;
+import com.hust.software.scenic.mgb.mapper.ScenicMapper;
 import com.hust.software.scenic.mgb.model.Mark;
 import com.hust.software.scenic.mgb.model.MarkExample;
 import com.hust.software.scenic.service.MarkService;
@@ -20,6 +21,8 @@ public class MarkServiceImpl implements MarkService{
     @Autowired
     private MarkMapper markMapper;
 
+    @Autowired
+    private ScenicMapper scenicMapper;
     @Override
     public CommonResult mark(Integer userId,Integer scenicId){
         if (isMarked(userId,scenicId)){
@@ -30,7 +33,8 @@ public class MarkServiceImpl implements MarkService{
         mark.setScenicId(scenicId);
         mark.setMarkDate(new Date());
         markMapper.insertSelective(mark);
-        return CommonResult.success("打开成功，该用户是第"+userId+"位打卡的用户",mark);
+
+        return CommonResult.success("打开成功，该用户是第"+userId+"位打卡的用户",scenicMapper.listTripScenic(scenicId));
     }
 
     @Override
