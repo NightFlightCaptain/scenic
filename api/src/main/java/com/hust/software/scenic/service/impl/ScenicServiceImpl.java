@@ -60,6 +60,7 @@ public class ScenicServiceImpl implements ScenicService {
 		}
 	}
 
+	
 	/**
 	 * 查询单个景点的信息，并将景点的图片找到后一起封装返回
 	 */
@@ -87,7 +88,10 @@ public class ScenicServiceImpl implements ScenicService {
 
 		return CommonResult.success("该景点信息查询成功", map);
 	}
-
+	
+	/**
+	 * 查询景点列表及其对应的图片
+	 */
 	@Override
 	public CommonResult selScenicListByPage(String name,Integer pageNow, Integer pageSize) {
 		ScenicExample se = new ScenicExample();
