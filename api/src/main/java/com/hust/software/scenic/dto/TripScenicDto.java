@@ -33,6 +33,15 @@ public class TripScenicDto {
     @ApiModelProperty(value = "维度")
     private BigDecimal latitude;
 
+    @ApiModelProperty(value = "地址")
+    private String address;
+
+    @ApiModelProperty(value = "电话")
+    private String phone;
+
+    @ApiModelProperty(value = "评分")
+    private Integer score;
+
     @ApiModelProperty(value = "图片链接")
     private String photoUrl;
 
@@ -47,8 +56,13 @@ public class TripScenicDto {
         this.setLongitude(scenic.getLongitude());
         this.setOpenTime(scenic.getOpenTime());
         this.setPrice(scenic.getPrice());
+        this.setAddress(scenic.getAddress());
+        this.setScore(scenic.getScore());
+        this.setPhone(scenic.getPhone());
         this.setSuggestedTime(scenic.getSuggestedTime());
     }
+
+
 
     public Integer getId() {
         return id;
@@ -112,6 +126,30 @@ public class TripScenicDto {
 
     public void setLatitude(BigDecimal latitude) {
         this.latitude = latitude;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
 
     public String getPhotoUrl() {

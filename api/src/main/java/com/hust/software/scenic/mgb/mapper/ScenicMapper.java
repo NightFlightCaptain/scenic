@@ -37,12 +37,12 @@ public interface ScenicMapper {
 
     int updateByPrimaryKey(Scenic record);
 
-    @Select({"select scenic.id as id,name,introduction,open_time,price,suggested_time,longitude,latitude,pic.url as photoUrl " ,
-            "from", TABLE_NAME, "scenic " ,
-            "left join picture_scenic pic_scenic on scenic.id = pic_scenic.scenic_id " ,
-            "left join picture pic on pic_scenic.picture_id = pic.id ",
-            "where pic_scenic.is_major = 1 and pic_scenic.is_deleted =0 and scenic.is_deleted =0 and pic.is_deleted =0",
-            "and scenic.id = #{scenicId} "
+    @Select({"SELECT scenic.id AS id,name,introduction,open_time,price,suggested_time,longitude,latitude,address,score,phone,pic.url AS photoUrl " +
+            " FROM ", TABLE_NAME, "scenic " +
+            "LEFT JOIN picture_scenic pic_scenic ON scenic.id = pic_scenic.scenic_id " +
+            "LEFT JOIN picture pic ON pic_scenic.picture_id = pic.id " +
+            "WHERE pic_scenic.is_major = 1 AND pic_scenic.is_deleted =0 AND scenic.is_deleted =0 AND pic.is_deleted =0" +
+            " AND scenic.id = #{scenicId} "
     })
     TripScenicDto listTripScenic(int scenicId);
 }
