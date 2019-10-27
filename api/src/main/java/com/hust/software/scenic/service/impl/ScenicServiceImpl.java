@@ -28,7 +28,6 @@ public class ScenicServiceImpl implements ScenicService {
 	@Autowired
 	private PictureScenicMapper pictureScenicMapper;
 	
-	
 	@Autowired
 	private PictureMapper pictureMapper;
 	@Override
@@ -101,13 +100,33 @@ public class ScenicServiceImpl implements ScenicService {
 		}
 		System.out.println("景点名称"+name);
 		List<Scenic> scenicList = scenicMapper.selectByExample(se);
-		if(scenicList.size()>0) {
-			return CommonResult.success("景点信息查询成功", scenicList);
-		}else if(scenicList.size()==0){
+		//做判断
+		if(scenicList.size()==0){
 			return CommonResult.success("没有查询到您要搜索的景点信息");
-		}else {
+		}else if(scenicList.size()<0){
 			return CommonResult.failed("景点信息查询失败");
 		}
+		List<Map<String,Object>> list = new ArrayList<>();
+		for(Scenic sc:scenicList) {
+			Map<String,Object> map = new HashMap<String, Object>();
+			PictureScenicExample pse = new PictureScenicExample();
+			PictureScenicExample.Criteria pCriteria = pse.createCriteria();
+			pCriteria.andScenicIdEqualTo(sc.getId());
+			pCriteria.andIsMajorEqualTo(true);
+			pCriteria.andIsDeletedEqualTo(false);
+			//按照预定只有一条数据
+			List<PictureScenic> picSceList = pictureScenicMapper.selectByExample(pse);
+			//做判断
+			if(picSceList.size()<=0) {
+				return CommonResult.failed("景点图片信息查询失败");
+			}
+			Picture picture = pictureMapper.selectByPrimaryKey(picSceList.get(0).getPictureId());
+			map.put("scenic", sc);
+			map.put("scenicpic", picture);
+			list.add(map);
+		}
+		return CommonResult.success("景点信息查询成功", list);
+
 	}
 
 }
