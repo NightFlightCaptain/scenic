@@ -130,7 +130,6 @@ public class ScenicServiceImpl implements ScenicService {
 			list.add(map);
 		}
 		return CommonResult.success("景点信息查询成功", list);
-
 	}
 
 }
