@@ -28,6 +28,15 @@ public class Scenic implements Serializable {
     @ApiModelProperty(value = "维度")
     private BigDecimal latitude;
 
+    @ApiModelProperty(value = "地址")
+    private String address;
+
+    @ApiModelProperty(value = "电话")
+    private String phone;
+
+    @ApiModelProperty(value = "评分")
+    private Integer score;
+
     @ApiModelProperty(value = "是否删除")
     private Boolean isDeleted;
 
@@ -97,6 +106,30 @@ public class Scenic implements Serializable {
         this.latitude = latitude;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
     public Boolean getIsDeleted() {
         return isDeleted;
     }
@@ -119,6 +152,9 @@ public class Scenic implements Serializable {
         sb.append(", suggestedTime=").append(suggestedTime);
         sb.append(", longitude=").append(longitude);
         sb.append(", latitude=").append(latitude);
+        sb.append(", address=").append(address);
+        sb.append(", phone=").append(phone);
+        sb.append(", score=").append(score);
         sb.append(", isDeleted=").append(isDeleted);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

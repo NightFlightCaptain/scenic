@@ -372,63 +372,63 @@ public class MarkExample {
             return (Criteria) this;
         }
 
-        public Criteria andRankIsNull() {
-            addCriterion("rank is null");
+        public Criteria andOrderRankIsNull() {
+            addCriterion("order_rank is null");
             return (Criteria) this;
         }
 
-        public Criteria andRankIsNotNull() {
-            addCriterion("rank is not null");
+        public Criteria andOrderRankIsNotNull() {
+            addCriterion("order_rank is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRankEqualTo(Integer value) {
-            addCriterion("rank =", value, "rank");
+        public Criteria andOrderRankEqualTo(Integer value) {
+            addCriterion("order_rank =", value, "orderRank");
             return (Criteria) this;
         }
 
-        public Criteria andRankNotEqualTo(Integer value) {
-            addCriterion("rank <>", value, "rank");
+        public Criteria andOrderRankNotEqualTo(Integer value) {
+            addCriterion("order_rank <>", value, "orderRank");
             return (Criteria) this;
         }
 
-        public Criteria andRankGreaterThan(Integer value) {
-            addCriterion("rank >", value, "rank");
+        public Criteria andOrderRankGreaterThan(Integer value) {
+            addCriterion("order_rank >", value, "orderRank");
             return (Criteria) this;
         }
 
-        public Criteria andRankGreaterThanOrEqualTo(Integer value) {
-            addCriterion("rank >=", value, "rank");
+        public Criteria andOrderRankGreaterThanOrEqualTo(Integer value) {
+            addCriterion("order_rank >=", value, "orderRank");
             return (Criteria) this;
         }
 
-        public Criteria andRankLessThan(Integer value) {
-            addCriterion("rank <", value, "rank");
+        public Criteria andOrderRankLessThan(Integer value) {
+            addCriterion("order_rank <", value, "orderRank");
             return (Criteria) this;
         }
 
-        public Criteria andRankLessThanOrEqualTo(Integer value) {
-            addCriterion("rank <=", value, "rank");
+        public Criteria andOrderRankLessThanOrEqualTo(Integer value) {
+            addCriterion("order_rank <=", value, "orderRank");
             return (Criteria) this;
         }
 
-        public Criteria andRankIn(List<Integer> values) {
-            addCriterion("rank in", values, "rank");
+        public Criteria andOrderRankIn(List<Integer> values) {
+            addCriterion("order_rank in", values, "orderRank");
             return (Criteria) this;
         }
 
-        public Criteria andRankNotIn(List<Integer> values) {
-            addCriterion("rank not in", values, "rank");
+        public Criteria andOrderRankNotIn(List<Integer> values) {
+            addCriterion("order_rank not in", values, "orderRank");
             return (Criteria) this;
         }
 
-        public Criteria andRankBetween(Integer value1, Integer value2) {
-            addCriterion("rank between", value1, value2, "rank");
+        public Criteria andOrderRankBetween(Integer value1, Integer value2) {
+            addCriterion("order_rank between", value1, value2, "orderRank");
             return (Criteria) this;
         }
 
-        public Criteria andRankNotBetween(Integer value1, Integer value2) {
-            addCriterion("rank not between", value1, value2, "rank");
+        public Criteria andOrderRankNotBetween(Integer value1, Integer value2) {
+            addCriterion("order_rank not between", value1, value2, "orderRank");
             return (Criteria) this;
         }
 
