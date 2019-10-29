@@ -72,6 +72,7 @@ CREATE TABLE `mark` (
 -- ----------------------------
 INSERT INTO `mark` VALUES ('1', '1', '1', '2019-10-26', null, '0');
 
+
 -- ----------------------------
 -- Table structure for picture
 -- ----------------------------
