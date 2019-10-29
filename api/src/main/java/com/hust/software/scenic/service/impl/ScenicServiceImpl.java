@@ -1,33 +1,28 @@
 package com.hust.software.scenic.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.hust.software.scenic.common.CommonResult;
 import com.hust.software.scenic.mgb.mapper.PictureMapper;
 import com.hust.software.scenic.mgb.mapper.PictureScenicMapper;
 import com.hust.software.scenic.mgb.mapper.ScenicMapper;
-import com.hust.software.scenic.mgb.model.Picture;
-import com.hust.software.scenic.mgb.model.PictureScenic;
-import com.hust.software.scenic.mgb.model.PictureScenicExample;
-import com.hust.software.scenic.mgb.model.Scenic;
-import com.hust.software.scenic.mgb.model.ScenicExample;
+import com.hust.software.scenic.mgb.model.*;
 import com.hust.software.scenic.service.ScenicService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class ScenicServiceImpl implements ScenicService {
 
 	@Autowired
 	private ScenicMapper scenicMapper;
-	
+
 	@Autowired
 	private PictureScenicMapper pictureScenicMapper;
-	
+
 	@Autowired
 	private PictureMapper pictureMapper;
 	@Override
@@ -60,25 +55,25 @@ public class ScenicServiceImpl implements ScenicService {
 		}
 	}
 
-	
+
 	/**
 	 * 查询单个景点的信息，并将景点的图片找到后一起封装返回
 	 */
 	@Override
 	public CommonResult selScenicById(Integer scenicId) {
 		Scenic scenic = scenicMapper.selectByPrimaryKey(scenicId);
-		
+
 		if(scenic==null) {
 			return CommonResult.failed("该景点信息查询失败");
 		}
-		
+
 		List<Picture> list = new ArrayList<Picture>();
 		Map<String,Object> map = new HashMap<>();
 		PictureScenicExample pse = new PictureScenicExample();
 		PictureScenicExample.Criteria criteria = pse.createCriteria();
 		criteria.andScenicIdEqualTo(scenicId);
 		List<PictureScenic> pictureScenicList = pictureScenicMapper.selectByExample(pse);
-		
+
 		for (PictureScenic p:pictureScenicList) {
 			Picture picture = pictureMapper.selectByPrimaryKey(p.getPictureId());
 			list.add(picture);
@@ -88,8 +83,8 @@ public class ScenicServiceImpl implements ScenicService {
 
 		return CommonResult.success("该景点信息查询成功", map);
 	}
-	
-	
+
+
 	/**
 	 * 查询景点列表及其对应的图片
 	 */
@@ -100,7 +95,7 @@ public class ScenicServiceImpl implements ScenicService {
 		se.setPageSize(pageSize);
 		ScenicExample.Criteria criteria = se.createCriteria();
 		criteria.andIsDeletedEqualTo(false);
-		if(!name.equals("") && name!=null) {
+		if(name!=null&&!"".equals(name)) {
 			criteria.andNameLike("%"+name+"%");
 		}
 		System.out.println("景点名称"+name);
@@ -108,10 +103,8 @@ public class ScenicServiceImpl implements ScenicService {
 		//做判断
 		if(scenicList.size()==0){
 			return CommonResult.success("没有查询到您要搜索的景点信息");
-		}else if(scenicList.size()<0){
-			return CommonResult.failed("景点信息查询失败");
 		}
-		List<Map<String,Object>> list = new ArrayList<>();
+        List<Map<String,Object>> list = new ArrayList<>();
 		for(Scenic sc:scenicList) {
 			Map<String,Object> map = new HashMap<String, Object>();
 			PictureScenicExample pse = new PictureScenicExample();

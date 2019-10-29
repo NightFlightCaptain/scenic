@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author: 小栗旬
  * @Date: 2019/10/26 12:36
  */
-@RestController("mark/")
+@RestController
 @Api(tags = "MarkController",description = "打卡接口")
 public class MarkController {
 
@@ -23,7 +23,7 @@ public class MarkController {
     private MarkService markService;
 
     @PostMapping("mark")
-    @ApiOperation("打卡")
+    @ApiOperation("打卡,打卡成功返回景点信息")
     public CommonResult addMark(@RequestParam("userId")@ApiParam("用户id") Integer userId,
                                 @RequestParam("scenicId")@ApiParam("景点id") Integer scenicId){
         return markService.mark(userId,scenicId);

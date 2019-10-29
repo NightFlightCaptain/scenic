@@ -1,10 +1,7 @@
 package com.hust.software.scenic.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.hust.software.scenic.common.CommonResult;
 import com.hust.software.scenic.mgb.model.Scenic;
@@ -39,7 +36,7 @@ public class ScenicController {
 	 * @param ScenicId
 	 * @return
 	 */
-	@GetMapping("delscenic")
+	@DeleteMapping("delscenic")
 	@ApiOperation("删除一条景点")
 	public CommonResult delScenic(@RequestParam("ScenicId")@ApiParam("景点ID") Integer ScenicId) {
 		return scenicService.delScenicById(ScenicId);
@@ -50,7 +47,7 @@ public class ScenicController {
 	 * @param scenic
 	 * @return
 	 */
-	@PostMapping("updscenic")
+	@PutMapping("updscenic")
 	@ApiOperation("更新一条景点信息")
 	public CommonResult updScenic(Scenic scenic) {
 		return scenicService.updScenicById(scenic);
@@ -76,9 +73,9 @@ public class ScenicController {
 	 */
 	@GetMapping("selsceniclist")
 	@ApiOperation("可模糊分页查询景点列表")
-	public CommonResult selScenicList(@RequestParam("ScenicName")@ApiParam("景点名称")String ScenicName,
-									  @RequestParam("pageNow")@ApiParam("当前页数")Integer pageNow,
-									  @RequestParam("pageSize")@ApiParam("显示条数")Integer pageSize) {
+	public CommonResult selScenicList(@RequestParam(value = "ScenicName",required = false)@ApiParam("景点名称")String ScenicName,
+									  @RequestParam(value = "pageNow",defaultValue = "1")@ApiParam("当前页数")Integer pageNow,
+									  @RequestParam(value = "pageSize",defaultValue = "10")@ApiParam("显示条数")Integer pageSize) {
 		return scenicService.selScenicListByPage(ScenicName, pageNow, pageSize);
 	}
 }
