@@ -29,6 +29,8 @@ class UserControllerTest {
                 .param("nickname","normal")
                 .param("password","123456");
         MvcResult result =mockMvc.perform(request).andReturn();
+        result.getResponse().setCharacterEncoding("UTF-8");
+
         System.out.println(result.getResponse().getStatus());
         System.out.println(result.getResponse().getContentAsString());
     }

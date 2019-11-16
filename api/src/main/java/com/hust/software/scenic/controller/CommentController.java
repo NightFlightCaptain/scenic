@@ -5,6 +5,7 @@ import com.hust.software.scenic.service.CommentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Api(tags = "CommentController",description = "评论接口")
-public class CommentController {
+public class CommentController implements InitializingBean {
     @Autowired
     private CommentService commentService;
 
@@ -34,5 +35,10 @@ public class CommentController {
                                    @RequestParam("content") @ApiParam("评论内容") String content,
                                    @RequestParam("score") @ApiParam("分数（1-5）") Integer score){
         return commentService.addComment(userId,scenicId,content,score);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+
     }
 }
