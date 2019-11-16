@@ -43,6 +43,20 @@ public class UserServiceTest {
         Assert.assertEquals("success",result);
     }
 
+    @Test
+    public void registerWithNullParam() {
+        User user = new User();
+        user.setUserId(2);
+        user.setUserName("姜");
+        user.setPassword("123456");
+        user.setHeadImgAddr("jianging");
+        user.setGender("女");
+        user.setSignature("1");
+
+        String result = userService.register(user);
+        Assert.assertEquals("failure",result);
+    }
+
     /**
      * 添加一个userid重复的用户，理应报错
      */
@@ -103,4 +117,23 @@ public class UserServiceTest {
         Assert.assertEquals("failure",result);
     }
 
+    @Test
+    public void bindWx() {
+        String result = userService.bindWx("1","123456","test");
+        Assert.assertEquals("success",result);
+    }
+
+
+    @Test
+    public void bindWxWithUnexistAccount() {
+        String result = userService.bindWx("222","123456","test");
+        Assert.assertEquals("failure",result);
+    }
+
+    @Test
+    public void loginByWx() {
+        User user = userService.loginByWx("tt");
+        Assert.assertNull(user);
+
+    }
 }

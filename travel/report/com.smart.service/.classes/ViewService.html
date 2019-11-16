@@ -1,0 +1,155 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ViewService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.smart.service</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ViewService (com.smart.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ViewService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/ 15)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ViewService$$EnhancerBySpringCGLIB$$231e7acd</td>
+  </tr>
+  <tr>
+    <td class="name">ViewService$$EnhancerBySpringCGLIB$$606300db</td>
+  </tr>
+  <tr>
+    <td class="name">ViewService$$EnhancerBySpringCGLIB$$606300db$$FastClassBySpringCGLIB$$67107229</td>
+  </tr>
+  <tr>
+    <td class="name">ViewService$$FastClassBySpringCGLIB$$86a68ca5</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/ 15)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.smart.service;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.github.pagehelper.PageHelper;
+<i>4</i>&nbsp;import com.smart.dao.UserViewMapper;
+<i>5</i>&nbsp;import com.smart.dao.ViewMapper;
+<i>6</i>&nbsp;import com.smart.domain.UserView;
+<i>7</i>&nbsp;import com.smart.domain.View;
+<i>8</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>9</i>&nbsp;import org.springframework.stereotype.Service;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;import java.util.List;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;@Service
+<b class="fc"><i>14</i>&nbsp;public class ViewService {</b>
+<i>15</i>&nbsp;    @Autowired
+<i>16</i>&nbsp;    private UserViewMapper userViewMapper;
+<i>17</i>&nbsp;    @Autowired
+<i>18</i>&nbsp;    private ViewMapper viewMapper;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    public View getViewById(Long viewId){
+<b class="fc"><i>21</i>&nbsp;        View view=viewMapper.selectByPrimaryKey(viewId);</b>
+<b class="fc"><i>22</i>&nbsp;        return view;</b>
+<i>23</i>&nbsp;    }
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    public List&lt;View&gt; getAllView(int pageNum,int pageSize){
+<b class="fc"><i>26</i>&nbsp;        PageHelper.startPage(pageNum,pageSize);</b>
+<b class="fc"><i>27</i>&nbsp;        List&lt;View&gt; views=viewMapper.selectAll();</b>
+<b class="fc"><i>28</i>&nbsp;        return views;</b>
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    }
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    public List&lt;View&gt; getMyFootprint(int pageNum,int pageSize,int userId){
+<b class="fc"><i>33</i>&nbsp;        PageHelper.startPage(pageNum,pageSize);</b>
+<b class="fc"><i>34</i>&nbsp;        List&lt;View&gt; views=viewMapper.selectFootprint(userId);</b>
+<b class="fc"><i>35</i>&nbsp;        return views;</b>
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    }
+<i>38</i>&nbsp;    public String addView(View view){
+<b class="fc"><i>39</i>&nbsp;        viewMapper.insert(view);</b>
+<b class="fc"><i>40</i>&nbsp;        return &quot;success&quot;;</b>
+<i>41</i>&nbsp;    }
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    public String daka(UserView userView){
+<b class="fc"><i>44</i>&nbsp;       int i= userViewMapper.check(userView);</b>
+<b class="fc"><i>45</i>&nbsp;       if(i==0)</b>
+<b class="fc"><i>46</i>&nbsp;           userViewMapper.insert(userView);</b>
+<b class="fc"><i>47</i>&nbsp;       return &quot;ÒÑ´ò¿¨&quot;;</b>
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    }
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-11-16 21:49</div>
+</div>
+</body>
+</html>

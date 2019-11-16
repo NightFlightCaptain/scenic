@@ -1,0 +1,229 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: EssayService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.smart.service</a> ]
+</div>
+
+<h1>Coverage Summary for Class: EssayService (com.smart.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EssayService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/ 14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.8%
+  </span>
+  <span class="absValue">
+    (60/ 62)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">EssayService$$EnhancerBySpringCGLIB$$467fe62b</td>
+  </tr>
+  <tr>
+    <td class="name">EssayService$$EnhancerBySpringCGLIB$$467fe62b$$FastClassBySpringCGLIB$$2bcf0608</td>
+  </tr>
+  <tr>
+    <td class="name">EssayService$$EnhancerBySpringCGLIB$$83c46c39</td>
+  </tr>
+  <tr>
+    <td class="name">EssayService$$FastClassBySpringCGLIB$$d74bcdc3</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/ 14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.8%
+  </span>
+  <span class="absValue">
+    (60/ 62)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.smart.service;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.github.pagehelper.PageHelper;
+<i>4</i>&nbsp;import com.smart.dao.EssayMapper;
+<i>5</i>&nbsp;import com.smart.dao.UserEssayCollectionMapper;
+<i>6</i>&nbsp;import com.smart.dao.UserEssayGreatMapper;
+<i>7</i>&nbsp;import com.smart.domain.Essay;
+<i>8</i>&nbsp;import com.smart.domain.UserEssayCollection;
+<i>9</i>&nbsp;import com.smart.domain.UserEssayGreat;
+<i>10</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>11</i>&nbsp;import org.springframework.stereotype.Service;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;import java.util.Date;
+<i>14</i>&nbsp;import java.util.List;
+<i>15</i>&nbsp;@Service
+<b class="fc"><i>16</i>&nbsp;public class EssayService {</b>
+<i>17</i>&nbsp;    @Autowired
+<i>18</i>&nbsp;    private UserEssayGreatMapper userEssayGreatMapper;
+<i>19</i>&nbsp;    @Autowired
+<i>20</i>&nbsp;    private UserEssayCollectionMapper userEssayCollectionMapper;
+<i>21</i>&nbsp;    @Autowired
+<i>22</i>&nbsp;    private EssayMapper essayMapper;
+<i>23</i>&nbsp;    public Essay getEssayById(Long essayId){
+<b class="fc"><i>24</i>&nbsp;        Essay essay=essayMapper.selectByPrimaryKey(essayId);</b>
+<b class="fc"><i>25</i>&nbsp;        if(essay!=null) {</b>
+<b class="fc"><i>26</i>&nbsp;            essay.setPageView(essay.getPageView() + 1);</b>
+<b class="fc"><i>27</i>&nbsp;            essayMapper.updateByPrimaryKey(essay);</b>
+<i>28</i>&nbsp;        }
+<b class="fc"><i>29</i>&nbsp;        return essay;</b>
+<i>30</i>&nbsp;    }
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    public List&lt;Essay&gt; getAllEssay(int pageNum,int pageSize){
+<b class="fc"><i>33</i>&nbsp;        PageHelper.startPage(pageNum,pageSize);</b>
+<b class="fc"><i>34</i>&nbsp;        List&lt;Essay&gt; essays=essayMapper.selectAll();</b>
+<b class="fc"><i>35</i>&nbsp;        return essays;</b>
+<i>36</i>&nbsp;    }
+<i>37</i>&nbsp;    public String writeEssay(Essay essay){
+<b class="fc"><i>38</i>&nbsp;        if(essay.getTitle()==null||essay.getauthorId()==null||essay.getAuthorName()==null)</b>
+<b class="fc"><i>39</i>&nbsp;            return &quot;failure&quot;;</b>
+<b class="fc"><i>40</i>&nbsp;        if(essay.getTag()==null)</b>
+<b class="fc"><i>41</i>&nbsp;            essay.setTag(&quot;journey&quot;);</b>
+<b class="fc"><i>42</i>&nbsp;        if(essay.getclassify()==null)</b>
+<b class="fc"><i>43</i>&nbsp;            essay.setclassify(&quot;others&quot;);</b>
+<b class="fc"><i>44</i>&nbsp;        essay.setCreateTime(new Date());</b>
+<b class="fc"><i>45</i>&nbsp;        essayMapper.insert(essay);</b>
+<b class="fc"><i>46</i>&nbsp;        return &quot;success&quot;;</b>
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    }
+<i>49</i>&nbsp;    public String modifyEssay(Essay essay){
+<b class="fc"><i>50</i>&nbsp;        int i=essayMapper.updateByPrimaryKey(essay);</b>
+<b class="fc"><i>51</i>&nbsp;        if(i==1)</b>
+<b class="fc"><i>52</i>&nbsp;            return &quot;success&quot;;</b>
+<i>53</i>&nbsp;        else
+<b class="fc"><i>54</i>&nbsp;            return &quot;failure&quot;;</b>
+<i>55</i>&nbsp;    }
+<i>56</i>&nbsp;    public String deleteEssay(long eaasayId){
+<b class="fc"><i>57</i>&nbsp;        int i=essayMapper.deleteByPrimaryKey(eaasayId);</b>
+<b class="fc"><i>58</i>&nbsp;        if(i==1)</b>
+<b class="fc"><i>59</i>&nbsp;            return &quot;success&quot;;</b>
+<i>60</i>&nbsp;        else
+<b class="fc"><i>61</i>&nbsp;            return &quot;failure&quot;;</b>
+<i>62</i>&nbsp;    }
+<i>63</i>&nbsp;    public List&lt;Essay&gt; getEssayByUserId(int pageNum,int pageSize,int userId){
+<b class="fc"><i>64</i>&nbsp;        PageHelper.startPage(pageNum,pageSize);</b>
+<b class="fc"><i>65</i>&nbsp;        List&lt;Essay&gt; essays=essayMapper.selectByAuthor(userId);</b>
+<b class="fc"><i>66</i>&nbsp;        return essays;</b>
+<i>67</i>&nbsp;    }
+<i>68</i>&nbsp;    public List&lt;Essay&gt; getEssayByTag(int pageNum,int pageSize,String tag){
+<b class="fc"><i>69</i>&nbsp;        PageHelper.startPage(pageNum,pageSize);</b>
+<b class="fc"><i>70</i>&nbsp;        List&lt;Essay&gt; essays=essayMapper.selectByTag(tag);</b>
+<b class="fc"><i>71</i>&nbsp;        return essays;</b>
+<i>72</i>&nbsp;    }public List&lt;Essay&gt; getEssayByClassify(int pageNum,int pageSize,String classify){
+<b class="fc"><i>73</i>&nbsp;        PageHelper.startPage(pageNum,pageSize);</b>
+<b class="fc"><i>74</i>&nbsp;        List&lt;Essay&gt; essays=essayMapper.selectByClassify(classify);</b>
+<b class="fc"><i>75</i>&nbsp;        return essays;</b>
+<i>76</i>&nbsp;    }
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    public String collectEssay(UserEssayCollection userEssayCollection){
+<b class="fc"><i>79</i>&nbsp;        int i=userEssayCollectionMapper.check(userEssayCollection);</b>
+<b class="fc"><i>80</i>&nbsp;        if(i==0){</b>
+<b class="fc"><i>81</i>&nbsp;            userEssayCollectionMapper.insert(userEssayCollection);</b>
+<b class="fc"><i>82</i>&nbsp;            return &quot;已收藏&quot;;</b>
+<i>83</i>&nbsp;        }
+<i>84</i>&nbsp;        else{
+<b class="fc"><i>85</i>&nbsp;            userEssayCollectionMapper.delete(userEssayCollection);</b>
+<b class="fc"><i>86</i>&nbsp;            return &quot;已取消&quot;;</b>
+<i>87</i>&nbsp;        }
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    }
+<i>90</i>&nbsp;    public String greatEssay(UserEssayGreat userEssayGreat){
+<b class="fc"><i>91</i>&nbsp;        int i=userEssayGreatMapper.check(userEssayGreat);</b>
+<b class="fc"><i>92</i>&nbsp;        if(i==0){</b>
+<b class="fc"><i>93</i>&nbsp;            userEssayGreatMapper.insert(userEssayGreat);</b>
+<b class="fc"><i>94</i>&nbsp;            Essay essay=essayMapper.selectByPrimaryKey(userEssayGreat.getEssayId());</b>
+<b class="fc"><i>95</i>&nbsp;            essay.setGreatNum(essay.getGreatNum()+1);</b>
+<b class="nc"><i>96</i>&nbsp;            modifyEssay(essay);</b>
+<b class="nc"><i>97</i>&nbsp;            return &quot;已点赞&quot;;</b>
+<i>98</i>&nbsp;        }
+<i>99</i>&nbsp;        else{
+<b class="fc"><i>100</i>&nbsp;            userEssayGreatMapper.delete(userEssayGreat);</b>
+<b class="fc"><i>101</i>&nbsp;            Essay essay=essayMapper.selectByPrimaryKey(userEssayGreat.getEssayId());</b>
+<b class="fc"><i>102</i>&nbsp;            essay.setGreatNum(essay.getGreatNum()-1);</b>
+<b class="fc"><i>103</i>&nbsp;            modifyEssay(essay);</b>
+<b class="fc"><i>104</i>&nbsp;            return &quot;已取消&quot;;</b>
+<i>105</i>&nbsp;        }
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;    }
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;    public List&lt;Essay&gt; getMyCollect(int pageNum,int pageSize,int userId){
+<b class="fc"><i>111</i>&nbsp;        PageHelper.startPage(pageNum,pageSize);</b>
+<b class="fc"><i>112</i>&nbsp;        List&lt;Essay&gt; essays=essayMapper.selectMyCollect(userId);</b>
+<b class="fc"><i>113</i>&nbsp;        return essays;</b>
+<i>114</i>&nbsp;    }
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;
+<i>117</i>&nbsp;    public List&lt;Essay&gt; getMyGreat(int pageNum,int pageSize,int userId){
+<b class="fc"><i>118</i>&nbsp;        PageHelper.startPage(pageNum,pageSize);</b>
+<b class="fc"><i>119</i>&nbsp;        List&lt;Essay&gt; essays=essayMapper.selectMyGreat(userId);</b>
+<b class="fc"><i>120</i>&nbsp;        return essays;</b>
+<i>121</i>&nbsp;    }
+<i>122</i>&nbsp;    public  List&lt;Essay&gt; searchByKeyword(int pageNum,int pageSize,String keyword){
+<b class="fc"><i>123</i>&nbsp;        PageHelper.startPage(pageNum,pageSize);</b>
+<b class="fc"><i>124</i>&nbsp;        List&lt;Essay&gt; essays=essayMapper.selectByKeyword(keyword);</b>
+<b class="fc"><i>125</i>&nbsp;        return essays;</b>
+<i>126</i>&nbsp;    }
+<i>127</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-11-16 21:49</div>
+</div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.smart.service;
 
+import com.beust.jcommander.ParameterException;
 import com.smart.domain.Essay;
 import com.smart.domain.UserEssayCollection;
 import com.smart.domain.UserEssayGreat;
@@ -33,7 +34,7 @@ public class EssayServiceTest {
 
     @Test
     public void getEssayById() {
-        Essay essay = essayService.getEssayById(1L);
+        Essay essay = essayService.getEssayById(9L);
         Assert.assertNotNull(essay);
     }
 
@@ -59,6 +60,24 @@ public class EssayServiceTest {
     }
 
     /**
+     * 添加一篇文章，应该会成功
+     */
+    @Test
+    public void writeEssay() {
+        Essay essay = new Essay();
+        essay.setEssayId(10L);
+        essay.setAuthorName("xiao li");
+        essay.setTitle("昙华林");
+        essay.setclassify("others");
+        essay.setTag("journey");
+        essay.setauthorId(1011);
+        essay.setContent("昙华林是一个好地方");
+        String result = essayService.writeEssay(essay);
+        Assert.assertEquals("success", result);
+    }
+
+
+    /**
      * 添加一篇essayId已存在的文章，应该报错
      */
     @Test(expected = DuplicateKeyException.class)
@@ -75,21 +94,53 @@ public class EssayServiceTest {
     }
 
     /**
-     * 添加一篇文章，应该会成功
+     * 没有title
      */
     @Test
-    public void writeEssay() {
+    public void writeEssayFailWithTitleNull() {
         Essay essay = new Essay();
-        essay.setEssayId(10L);
+        essay.setEssayId(11L);
+        essay.setAuthorName("xiao li");
+        essay.setclassify("others");
+        essay.setTag("journey");
+        essay.setauthorId(1011);
+        essay.setContent("昙华林是一个好地方");
+        String result = essayService.writeEssay(essay);
+        Assert.assertEquals("failure", result);
+    }
+
+    /**
+     * 没有tag,会自动添加tag
+     */
+    @Test
+    public void writeEssayFailWithTagNull() {
+        Essay essay = new Essay();
+        essay.setEssayId(15L);
         essay.setAuthorName("xiao li");
         essay.setTitle("昙华林");
         essay.setclassify("others");
+        essay.setauthorId(1011);
+        essay.setContent("昙华林是一个好地方");
+        String result = essayService.writeEssay(essay);
+        Assert.assertEquals("success", result);
+    }
+
+    /**
+     * 没有Classify，会自动添加Classify
+     */
+    @Test
+    public void writeEssayFailWithClassifyNull() {
+        Essay essay = new Essay();
+        essay.setEssayId(13L);
+        essay.setAuthorName("xiao li");
+        essay.setTitle("昙华林");
         essay.setTag("journey");
         essay.setauthorId(1011);
         essay.setContent("昙华林是一个好地方");
         String result = essayService.writeEssay(essay);
         Assert.assertEquals("success", result);
     }
+
 
     /**
      * 修改一篇文章，应该成功。但是这个地方报错了，是代码问题，可以在PPT里面写
@@ -162,6 +213,15 @@ public class EssayServiceTest {
     }
 
 
+    @Test
+    public void getEssayByClassify() {
+        List<Essay> essays = essayService.getEssayByClassify(1,10,"others");
+        Assert.assertNotNull(essays);
+        for (Essay essay : essays) {
+            Assert.assertNotNull(essay);
+        }
+    }
+
     /**
      * 收藏文章
      */
@@ -176,7 +236,7 @@ public class EssayServiceTest {
     }
 
     /**
-     * 由于文章id不存在，所以应该报错或返回相关信息，这个地方是明显的代码BUG，可以在PPT里面写一下
+     * 由于文章id不存在，所以应该报错或返回相关信息，这个地方是明显的代码BUG，可以在PPT里面写一下。
      */
     @Test(expected = Exception.class)
     public void collectEssayFail() {
@@ -197,9 +257,9 @@ public class EssayServiceTest {
     }
 
     /**
-     * 由于文章id不存在，所以应该报错或返回相关信息，这个地方是明显的代码BUG，可以在PPT里面写
+     * 由于文章id不存在，所以应该报错或返回相关信息。这个地方是明显的代码BUG，可以在PPT里面写
      */
-    @Test(expected = Exception.class)
+    @Test(expected = ParameterException.class)
     public void greatEssayFail() {
         UserEssayGreat great = new UserEssayGreat();
         great.setUserId(1);
@@ -218,6 +278,14 @@ public class EssayServiceTest {
     @Test
     public void getMyGreat() {
         List<Essay> essays = essayService.getMyGreat(1, 2, 1);
+        for (Essay essay : essays) {
+            Assert.assertNotNull(essay);
+        }
+    }
+
+    @Test
+    public void searchByKeyword() {
+        List<Essay> essays = essayService.searchByKeyword(1,10,"好地方");
         for (Essay essay : essays) {
             Assert.assertNotNull(essay);
         }

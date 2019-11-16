@@ -1,0 +1,150 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UserService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.smart.service</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UserService (com.smart.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (21/ 21)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">UserService$$EnhancerBySpringCGLIB$$a046f9a7</td>
+  </tr>
+  <tr>
+    <td class="name">UserService$$EnhancerBySpringCGLIB$$dd8b7fb5</td>
+  </tr>
+  <tr>
+    <td class="name">UserService$$EnhancerBySpringCGLIB$$dd8b7fb5$$FastClassBySpringCGLIB$$48cf9966</td>
+  </tr>
+  <tr>
+    <td class="name">UserService$$FastClassBySpringCGLIB$$753a64bf</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (21/ 21)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.smart.service;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.smart.dao.UserMapper;
+<i>4</i>&nbsp;import com.smart.domain.User;
+<i>5</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>6</i>&nbsp;import org.springframework.stereotype.Service;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;@Service
+<b class="fc"><i>9</i>&nbsp;public class UserService {</b>
+<i>10</i>&nbsp;    @Autowired
+<i>11</i>&nbsp;    private UserMapper userMapper;
+<i>12</i>&nbsp;    public String register(User user){
+<b class="fc"><i>13</i>&nbsp;        if(user.getUserName()==null||user.getPassword()==null||user.getUserAccount()==null)</b>
+<b class="fc"><i>14</i>&nbsp;            return &quot;failure&quot;;</b>
+<b class="fc"><i>15</i>&nbsp;       userMapper.insert(user);</b>
+<b class="fc"><i>16</i>&nbsp;       return &quot;success&quot;;</b>
+<i>17</i>&nbsp;    }
+<i>18</i>&nbsp;    public User login(String userAccount,String password){
+<b class="fc"><i>19</i>&nbsp;        User user=userMapper.selectByAccount(userAccount);</b>
+<b class="fc"><i>20</i>&nbsp;        if(user!=null&amp;&amp;user.getPassword().equals(password))</b>
+<b class="fc"><i>21</i>&nbsp;            return user;</b>
+<i>22</i>&nbsp;        else
+<b class="fc"><i>23</i>&nbsp;            return null;</b>
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    }
+<i>26</i>&nbsp;    public User loginByWx(String wxCode){
+<b class="fc"><i>27</i>&nbsp;        User user=userMapper.selectByWxCode(wxCode);</b>
+<b class="fc"><i>28</i>&nbsp;       return user;</b>
+<i>29</i>&nbsp;    }
+<i>30</i>&nbsp;    public String changeInfo(User user){
+<b class="fc"><i>31</i>&nbsp;        int i=userMapper.updateByPrimaryKey(user);</b>
+<b class="fc"><i>32</i>&nbsp;        if(1==i)</b>
+<b class="fc"><i>33</i>&nbsp;            return &quot;success&quot;;</b>
+<i>34</i>&nbsp;        else
+<b class="fc"><i>35</i>&nbsp;            return &quot;failure&quot;;</b>
+<i>36</i>&nbsp;    }
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    public String bindWx(String userAccount,String password,String wxCode){
+<b class="fc"><i>39</i>&nbsp;        User user=login(userAccount,password);</b>
+<b class="fc"><i>40</i>&nbsp;        if(user==null)</b>
+<b class="fc"><i>41</i>&nbsp;            return &quot;failure&quot;;</b>
+<i>42</i>&nbsp;        else {
+<b class="fc"><i>43</i>&nbsp;            user.setWxCode(wxCode);</b>
+<b class="fc"><i>44</i>&nbsp;            changeInfo(user);</b>
+<b class="fc"><i>45</i>&nbsp;            return &quot;success&quot;;</b>
+<i>46</i>&nbsp;        }
+<i>47</i>&nbsp;    }
+<i>48</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-11-16 21:49</div>
+</div>
+</body>
+</html>
