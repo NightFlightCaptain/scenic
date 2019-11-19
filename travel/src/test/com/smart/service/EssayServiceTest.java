@@ -143,7 +143,7 @@ public class EssayServiceTest {
 
 
     /**
-     * 修改一篇文章，应该成功。但是这个地方报错了，是代码问题，可以在PPT里面写
+     * 修改一篇文章，应该成功。但是这个地方报错了
      */
     @Test
     public void modifyEssay() {
@@ -158,11 +158,12 @@ public class EssayServiceTest {
     /**
      * 修改文章，缺少必要的信息，理应报错
      */
-    @Test(expected = Exception.class)
+    @Test()
     public void modifyEssayFail() {
         Essay essay = new Essay();
         essay.setauthorId(33333);
         String result = essayService.modifyEssay(essay);
+        Assert.assertEquals("failure",result);
     }
 
     /**
@@ -236,14 +237,15 @@ public class EssayServiceTest {
     }
 
     /**
-     * 由于文章id不存在，所以应该报错或返回相关信息，这个地方是明显的代码BUG，可以在PPT里面写一下。
+     * 由于文章id不存在，所以应该报错或返回相关信息。
      */
-    @Test(expected = Exception.class)
+    @Test
     public void collectEssayFail() {
         UserEssayCollection collection = new UserEssayCollection();
         collection.setUserId(1);
         collection.setEssayId(5L);
         String result = essayService.collectEssay(collection);
+        Assert.assertEquals("failure",result);
     }
 
     @Test
@@ -257,14 +259,15 @@ public class EssayServiceTest {
     }
 
     /**
-     * 由于文章id不存在，所以应该报错或返回相关信息。这个地方是明显的代码BUG，可以在PPT里面写
+     * 由于文章id不存在，所以应该报错或返回相关信息。
      */
-    @Test(expected = ParameterException.class)
+    @Test
     public void greatEssayFail() {
         UserEssayGreat great = new UserEssayGreat();
         great.setUserId(1);
         great.setEssayId(5L);
         String result = essayService.greatEssay(great);
+        Assert.assertEquals("failure",result);
     }
 
     @Test
