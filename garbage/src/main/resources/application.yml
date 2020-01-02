@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    include: datasource
+
+server:
+  port: 8004
+  tomcat:
+    uri-encoding: utf-8
+
+
+
+mybatis:
+  mapper-locations:
+    - classpath:mapper/*.xml
+    - classpath*:com/**/mapper/*.xml
