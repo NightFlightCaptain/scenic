@@ -33,7 +33,7 @@ public interface GarbageMapper {
 
     @Select({"SELECT garbage.id, garbage.NAME, garbage_type.id AS typeId,garbage_type.NAME AS typeName ",
             " FROM garbage LEFT JOIN garbage_type ON garbage.type_id = garbage_type.id",
-            " WHERE garbage.name LIKE CONCAT('%',#{name},'%')  "})
+            " WHERE garbage.name LIKE CONCAT('%',#{name},'%')  ORDER BY typeId"})
     List<SingleGarbage> listGarbageByName(@Param("name") String name);
 
     @Select({"SELECT garbage.id, garbage.NAME, garbage_type.id AS typeId,garbage_type.NAME AS typeName ",
