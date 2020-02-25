@@ -15,4 +15,9 @@ public interface GarbageService {
 
     CommonResult listRandomGarbages();
 
+    CommonResult addGarbage(String name, Integer typeId);
+
+    CommonResult deleteGarbage(Integer id);
+
+    CommonResult modifyGarbage(Integer id, String name, Integer typeId);
 }
