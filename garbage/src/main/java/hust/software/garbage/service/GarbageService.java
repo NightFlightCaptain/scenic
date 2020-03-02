@@ -1,6 +1,7 @@
 package hust.software.garbage.service;
 
 import hust.software.garbage.common.CommonResult;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author: 小栗旬
@@ -20,4 +21,8 @@ public interface GarbageService {
     CommonResult deleteGarbage(Integer id);
 
     CommonResult modifyGarbage(Integer id, String name, Integer typeId);
+
+    CommonResult identifyGarbage(MultipartFile file);
+
+    CommonResult getAccount();
 }

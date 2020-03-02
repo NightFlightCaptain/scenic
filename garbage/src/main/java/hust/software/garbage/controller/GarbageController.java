@@ -6,7 +6,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author: 小栗旬
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class GarbageController {
     @Autowired
     private GarbageService garbageService;
+
 
     @GetMapping("search")
     @ApiOperation("搜索")
@@ -67,6 +72,21 @@ public class GarbageController {
                                       @RequestParam("typeId") @ApiParam("垃圾类别id") Integer typeId) {
         return garbageService.modifyGarbage(id, name, typeId);
     }
+
+    @PostMapping("identifyGarbage")
+    @ApiOperation("图片识别接口")
+    public CommonResult identifyGarbage(@RequestParam(value = "file") MultipartFile file) {
+        return garbageService.identifyGarbage(file);
+    }
+
+    @GetMapping("statisticAccount")
+    @ApiOperation("统计查询次数")
+    public CommonResult statisticAccount(){
+        return CommonResult.success(garbageService.getAccount());
+    }
+
+
+
 
 
 }

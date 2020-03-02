@@ -1,15 +1,16 @@
 package hust.software.garbage.service.impl;
 
 import hust.software.garbage.common.CommonResult;
+import hust.software.garbage.common.UploadUtil;
 import hust.software.garbage.dto.SingleGarbage;
 import hust.software.garbage.mgb.mapper.GarbageMapper;
 import hust.software.garbage.mgb.mapper.GarbageTypeMapper;
-import hust.software.garbage.mgb.model.Garbage;
-import hust.software.garbage.mgb.model.GarbageExample;
-import hust.software.garbage.mgb.model.GarbageType;
+import hust.software.garbage.mgb.mapper.SearchAccountMapper;
+import hust.software.garbage.mgb.model.*;
 import hust.software.garbage.service.GarbageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -23,6 +24,11 @@ public class GarbageServiceImpl implements GarbageService {
     private GarbageMapper garbageMapper;
     @Autowired
     private GarbageTypeMapper garbageTypeMapper;
+    @Autowired
+    private SearchAccountMapper searchAccountMapper;
+
+    @Autowired
+    private UploadUtil uploadUtil;
 
     @Override
     public CommonResult listGarbagesByName(String name) {
@@ -114,8 +120,37 @@ public class GarbageServiceImpl implements GarbageService {
         } else {
             return CommonResult.failed("修改失败");
         }
+    }
 
+    @Override
+    public CommonResult identifyGarbage(MultipartFile file) {
+        if (file.isEmpty()) {
+            return CommonResult.failed("上传图片为空");
+        }
+        String fileName = file.getOriginalFilename();
+        String suffixName = fileName.substring(fileName.lastIndexOf("."));
+        if (!".jpg".equals(suffixName) && !".png".equals(suffixName)) {
+            return CommonResult.failed("请上传jpg或png格式图片");
+        }
+        String identifyResult = uploadUtil.uploadPicAndIdentify(file);
 
+        addCount(identifyResult.split("/")[0]);
+        return CommonResult.success("识别成功", identifyResult);
+    }
+
+    /**
+     * 给类别查询次数+1
+     * @param typeName 垃圾类别
+     */
+    private void addCount(String typeName) {
+        searchAccountMapper.addAccount(typeName);
+    }
+
+    @Override
+    public CommonResult getAccount(){
+        SearchAccountExample example = new SearchAccountExample();
+        List<SearchAccount> searchAccounts = searchAccountMapper.selectByExample(example);
+        return CommonResult.success(searchAccounts);
     }
 
 
