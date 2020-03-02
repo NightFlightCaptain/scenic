@@ -11,7 +11,7 @@
  Target Server Version : 50719
  File Encoding         : 65001
 
- Date: 02/01/2020 11:36:42
+ Date: 02/03/2020 16:59:32
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,7 @@ CREATE TABLE `garbage`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `type_index`(`type_id`) USING BTREE,
   CONSTRAINT `type_index` FOREIGN KEY (`type_id`) REFERENCES `garbage_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3987 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3991 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of garbage
@@ -4019,6 +4019,7 @@ INSERT INTO `garbage` VALUES (3983, '果汁机', 1);
 INSERT INTO `garbage` VALUES (3984, '书桌', 4);
 INSERT INTO `garbage` VALUES (3985, '桌子', 4);
 INSERT INTO `garbage` VALUES (3986, '家用吸尘器', 1);
+INSERT INTO `garbage` VALUES (3987, '测试垃圾', 1);
 
 -- ----------------------------
 -- Table structure for garbage_type
@@ -4033,9 +4034,28 @@ CREATE TABLE `garbage_type`  (
 -- ----------------------------
 -- Records of garbage_type
 -- ----------------------------
-INSERT INTO `garbage_type` VALUES (1, '可回收垃圾');
+INSERT INTO `garbage_type` VALUES (1, '可回收物');
 INSERT INTO `garbage_type` VALUES (2, '有害垃圾');
-INSERT INTO `garbage_type` VALUES (3, '湿垃圾');
-INSERT INTO `garbage_type` VALUES (4, '干垃圾');
+INSERT INTO `garbage_type` VALUES (3, '厨余垃圾');
+INSERT INTO `garbage_type` VALUES (4, '其他垃圾');
+
+-- ----------------------------
+-- Table structure for search_account
+-- ----------------------------
+DROP TABLE IF EXISTS `search_account`;
+CREATE TABLE `search_account`  (
+  `id` int(11) NOT NULL,
+  `type_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `account` int(255) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of search_account
+-- ----------------------------
+INSERT INTO `search_account` VALUES (1, '可回收物', 1);
+INSERT INTO `search_account` VALUES (2, '有害垃圾', 0);
+INSERT INTO `search_account` VALUES (3, '厨余垃圾', 2);
+INSERT INTO `search_account` VALUES (4, '其他垃圾', 0);
 
 SET FOREIGN_KEY_CHECKS = 1;
