@@ -134,8 +134,13 @@ public class GarbageServiceImpl implements GarbageService {
         }
         String identifyResult = uploadUtil.uploadPicAndIdentify(file);
 
-        addCount(identifyResult.split("/")[0]);
-        return CommonResult.success("识别成功", identifyResult);
+        String typeName =identifyResult.split("/")[0];
+        String garbageName = identifyResult.split("/")[1];
+        addCount(typeName);
+        SingleGarbage singleGarbage = new SingleGarbage();
+        singleGarbage.setTypeId(garbageTypeMapper.getIdByTypeName(typeName));
+        singleGarbage.setName(garbageName);
+        return CommonResult.success("识别成功", singleGarbage);
     }
 
     /**
